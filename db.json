@@ -1,0 +1,24 @@
+{
+  "database": [
+    {
+      "contacts": [
+        {
+          "name": "Даниил",
+          "number": "123123",
+          "id": "lVoS0XzgF"
+        },
+        {
+          "name": "asdasdasd",
+          "number": "123123",
+          "id": "4Yl_yhvod"
+        },
+        {
+          "name": "Даня",
+          "number": "123123",
+          "id": "6a-uY1RAC"
+        }
+      ],
+      "id": "Contacts"
+    }
+  ]
+}
