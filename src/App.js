@@ -4,9 +4,8 @@ import "@pnotify/core/dist/PNotify.css";
 import * as PNotifyMobile from "@pnotify/mobile";
 import "@pnotify/mobile/dist/PNotifyMobile.css";
 import { connect, useDispatch } from "react-redux";
-import actions from "./redux/phonebook/phonebook-actions";
-import * as operations from "./redux/phonebook/phonebook-operations";
-import { setContacts } from "./redux/phonebook/phonebook-api";
+import { inputChange } from "./redux/phonebook/phonebook-actions";
+import operations from "./redux/phonebook/phonebook-operations";
 
 import Form from "./components/Form/Form";
 import Filter from "./components/Filter/Filter";
@@ -18,6 +17,7 @@ import "./App.css";
 function App({
   contacts,
   inputValue,
+  updateContacts,
   visibleContacts,
   handleSubmit,
   deleteContact,
@@ -29,13 +29,13 @@ function App({
     dispatch(operations.fatchAllContacts());
   }, [dispatch]);
 
-  useEffect(() => {
-    if (contacts.length === 0) {
-      return;
-    } else {
-      setContacts(contacts);
-    }
-  }, [contacts]);
+  // useEffect(() => {
+  //   if (contacts.length === 0) {
+  //     return;
+  //   } else {
+  //      operations.fatchAllContacts()
+  //   }
+  // }, [contacts]);
 
   const submit = (data) => {
     if (
@@ -49,7 +49,13 @@ function App({
       });
     } else {
       handleSubmit(data);
+      updateContacts();
     }
+  };
+
+  const deleteContactfromServer = (id) => {
+    deleteContact(id);
+    updateContacts();
   };
 
   return (
@@ -63,7 +69,10 @@ function App({
       {contacts.length === 0 ? (
         <p>No Contacts</p>
       ) : (
-        <Contacts contacts={visibleContacts} deleteContact={deleteContact} />
+        <Contacts
+          contacts={visibleContacts}
+          deleteContact={deleteContactfromServer}
+        />
       )}
     </div>
   );
@@ -75,9 +84,9 @@ const mapStateToProps = (state) => ({
   visibleContacts: phonebookSelectors.getVisibleContacts(state),
 });
 const mapDispatchToProps = (dispatch) => ({
-  handleSubmit: (value) => dispatch(actions.handleSubmit(value)),
-  deleteContact: (id) => dispatch(actions.deleteContact(id)),
-  inputChange: (event) =>
-    dispatch(actions.inputChange(event.currentTarget.value)),
+  handleSubmit: (value) => dispatch(operations.addContact(value)),
+  deleteContact: (id) => dispatch(operations.deleteContact(id)),
+  updateContacts: () => dispatch(operations.fatchAllContacts()),
+  inputChange: (event) => dispatch(inputChange(event.currentTarget.value)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(App);

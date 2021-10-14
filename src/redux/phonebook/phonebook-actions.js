@@ -1,32 +1,36 @@
 import { createAction } from "@reduxjs/toolkit";
 
-const handleSubmit = createAction("contact/Submit");
+export const inputChange = createAction("contact/inputChange");
 
-const deleteContact = createAction("contact/Delete");
+export const fatchContactsRequest = createAction(
+  "contact/fatchContactsRequest"
+);
+export const fatchContactsSuccess = createAction(
+  "contact/fatchContactsSuccess"
+);
+export const fatchContactsError = createAction("contact/fatchContactsError");
 
-const inputChange = createAction("contact/inputChange");
+export const setContactRequest = createAction("contact/setContactsRequest");
+export const setContactSuccess = createAction("contact/setContactsSucces");
+export const setContactError = createAction("contact/setContactsError");
 
-const fatchContactsRequest = createAction("contact/fatchContactsRequest");
+export const deleteContactRequest = createAction(
+  "contact/deleteContactRequest"
+);
+export const deleteContactSuccess = createAction(
+  "contact/deleteContactSuccess"
+);
+export const deleteContactError = createAction("contact/deleteContactError");
 
-const fatchContactsSuccess = createAction("contact/fatchContactsSuccess");
-
-const fatchContactsError = createAction("contact/fatchContactsError");
-
-const setContactRequest = createAction("contact/setContactsRequest");
-
-const setContactSuccess = createAction("contact/setContactsSucces");
-
-const setContactError = createAction("contact/setContactsError");
-
-const actions = {
-  handleSubmit,
-  deleteContact,
-  inputChange,
-  fatchContactsRequest,
-  fatchContactsSuccess,
-  fatchContactsError,
-  setContactRequest,
-  setContactSuccess,
-  setContactError,
-};
-export default actions;
+// const actions = {
+//   handleSubmit,
+//   deleteContact,
+//   inputChange,
+//   fatchContactsRequest,
+//   fatchContactsSuccess,
+//   fatchContactsError,
+//   setContactRequest,
+//   setContactSuccess,
+//   setContactError,
+// };
+// export default actions;

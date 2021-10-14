@@ -1,12 +1,49 @@
-import actions from "./phonebook-actions";
-import { getContacts } from "./phonebook-api";
+import {
+  fatchContactsRequest,
+  fatchContactsSuccess,
+  fatchContactsError,
+  setContactRequest,
+  setContactSuccess,
+  setContactError,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
+} from "./phonebook-actions";
 
-export const fatchAllContacts = () => async (dispatch) => {
-  dispatch(actions.fatchContactsRequest());
+import axios from "axios";
+
+axios.defaults.baseURL = `http://localhost:3000`;
+
+const fatchAllContacts = () => async (dispatch) => {
+  dispatch(fatchContactsRequest());
   try {
-    const contacts = await getContacts();
-    dispatch(actions.fatchContactsSuccess(contacts));
+    const { data } = await axios.get("/contacts");
+    dispatch(fatchContactsSuccess(data));
   } catch (error) {
-    dispatch(actions.fatchContactsError(error.message));
+    dispatch(fatchContactsError(error));
   }
 };
+
+const addContact = (newcontact) => (dispatch) => {
+  dispatch(setContactRequest());
+  axios
+    .post("/contacts", newcontact)
+    .then(({ data }) => dispatch(setContactSuccess(data)))
+    .catch((error) => dispatch(setContactError(error)));
+};
+
+const deleteContact = (contactId) => (dispatch) => {
+  dispatch(deleteContactRequest());
+  axios
+    .delete(`/contacts/${contactId}`)
+    .then(() => dispatch(deleteContactSuccess(contactId)))
+    .catch((error) => dispatch(deleteContactError(error)));
+};
+
+const operati = {
+  fatchAllContacts,
+  addContact,
+  deleteContact,
+};
+
+export default operati;

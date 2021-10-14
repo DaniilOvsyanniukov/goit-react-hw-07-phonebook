@@ -1,24 +1,24 @@
 {
-  "database": [
+  "contacts": [
     {
-      "contacts": [
-        {
-          "name": "Даниил",
-          "number": "123123",
-          "id": "lVoS0XzgF"
-        },
-        {
-          "name": "asdasdasd",
-          "number": "123123",
-          "id": "4Yl_yhvod"
-        },
-        {
-          "name": "Даня",
-          "number": "123123",
-          "id": "6a-uY1RAC"
-        }
-      ],
-      "id": "Contacts"
+      "name": "Настя",
+      "number": "123123",
+      "id": "HdMJmuAu_"
+    },
+    {
+      "name": "Даниил",
+      "number": "123123",
+      "id": "NiP_LOCFN"
+    },
+    {
+      "name": "Виктор",
+      "number": "695464654",
+      "id": "j7rCU47vp"
+    },
+    {
+      "name": "Константин",
+      "number": "6874628",
+      "id": "XF7fEcbLW"
     }
   ]
 }

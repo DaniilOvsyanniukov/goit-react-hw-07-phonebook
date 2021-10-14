@@ -1,26 +1,47 @@
 import { combineReducers } from "redux";
 import { createReducer } from "@reduxjs/toolkit";
-import actions from "./phonebook-actions";
+import {
+  inputChange,
+  fatchContactsRequest,
+  fatchContactsSuccess,
+  fatchContactsError,
+  setContactRequest,
+  setContactSuccess,
+  setContactError,
+  deleteContactRequest,
+  deleteContactSuccess,
+  deleteContactError,
+} from "./phonebook-actions";
 
 const isLoading = createReducer(false, {
-  [actions.fatchContactsRequest]: () => true,
-  [actions.fatchContactsSuccess]: () => false,
-  [actions.fatchContactsError]: () => false,
+  [fatchContactsRequest]: () => true,
+  [fatchContactsSuccess]: () => false,
+  [fatchContactsError]: () => false,
+  [setContactRequest]: () => true,
+  [setContactSuccess]: () => false,
+  [setContactError]: () => false,
+  [deleteContactRequest]: () => true,
+  [deleteContactSuccess]: () => false,
+  [deleteContactError]: () => false,
 });
 
 const contactReducer = createReducer([], {
-  [actions.fatchContactsSuccess]: (_, action) => action.payload,
-  [actions.handleSubmit]: (state, { payload }) => [...state, payload],
-  [actions.deleteContact]: (state, { payload }) =>
+  [fatchContactsSuccess]: (_, { payload }) => payload,
+  [setContactSuccess]: (state, { payload }) => {
+    console.log(state);
+  },
+  [deleteContactSuccess]: (state, { payload }) =>
     state.filter((contacts) => !contacts.id.includes(payload)),
 });
 
 const inputValueReducer = createReducer("", {
-  [actions.inputChange]: (_, { payload }) => payload,
+  [inputChange]: (_, { payload }) => payload,
 });
+const error = createReducer(null, {});
 
 export default combineReducers({
   contacts: contactReducer,
   inputValue: inputValueReducer,
   isLoading,
+  error,
 });
